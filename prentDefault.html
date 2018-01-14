@@ -4,22 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>form表单阻止默认提交刷新的两种方式</title>
 </head>
 <body>
-    <form id="myform">  
-        姓名:<input type="text" id="myname" /> <br />  
+    <form id="submit" action="www.baidu.com" method="post">
+        <h3>submit</h3>  
+        姓名:<input type="text" name="myname" /> <br />  
         <input type="submit" value="提交" />  
-    </form>  
+    </form>
+    <form   action="www.baidu.com" method="post">
+        <h3>button</h3>
+        姓名:<input type="text" name="myname" /> <br />  
+        <button id="button">提交</button>
+    </form>    
 </body>
 <script >
-        window.onload = function() {  
-            var myform = document.getElementById('myform');  
-            myform.onsubmit = function(e) {  
-                   e.preventDefault()
-                    alert('dasda')
+        window.onload = function() {
+            handleSubmit() 
+            handleButton()
+            function handleSubmit(){
+                var myform = document.getElementById('submit');  
+                myform.onsubmit=function(e){
+                    e.preventDefault()
+                    console.log(e) 
+                }
+            } 
+            function handleButton(){
+                var myform = document.getElementById('button');  
+                myform.onclick=function(e){
+                    e.preventDefault()
+                    console.log(e) 
                 }  
-            }   
+            }
+              
+        }   
 </script>
 </html>
 

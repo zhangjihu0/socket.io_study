@@ -20,13 +20,28 @@ let io = require('socket.io')(server);
 //监听客户端连接，当连接到来的时候执行对应的回调函数；
 //socket对象是每个客户端专属有一个
 io.on('connection',function(socket){
+    let username;//undefind
     //当服务器端接收到客户端的消息后执行回调函数
     socket.on('message',function(msg){
-       
+       if(username){//如果已经赋值成功
+        io.emit('message',{
+            username,
+            content:msg,
+            createAt:new Date().toLocaleString()
+        });
+       }else{//如果未赋值，依然是undefind
+            username = msg;
+            //广播所有人
+            io.emit('message',{
+                username:'系统',
+                content:'欢迎来到${username}聊天室',
+                createAt:new Date().toLocaleString()
+            });
+       }
         // console.log(msg);
         // socket.send('服务器说:'+msg)
         //广播给所有的人
-        io.emit('message',msg);
+       
     })
 })
 server.listen(8080)
@@ -36,5 +51,6 @@ server.listen(8080)
  *      2.在提交表单的时候取消默认事件，2取消消息内容发送给服务器
  *      3.服务器接收发送客户端发过来的消息，广播给所有的客户端
  *      4.其他客户端收到消息后把发到消息列表的里的显示出来    
- *   
+ *  2.实现具体名称聊天
+ *      1.
  *  **/ 
