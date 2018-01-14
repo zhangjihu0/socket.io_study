@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form id="myform">  
+        姓名:<input type="text" id="myname" /> <br />  
+        <input type="submit" value="提交" />  
+    </form>  
+</body>
+<script >
+        window.onload = function() {  
+            var myform = document.getElementById('myform');  
+            myform.onsubmit = function(e) {  
+                   e.preventDefault()
+                    alert('dasda')
+                }  
+            }   
+</script>
+</html>
+
